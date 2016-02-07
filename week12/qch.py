@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 x = int(raw_input('Enter an integer: '))
 ans = 0
 while ans**3 < x:
@@ -5,4 +7,3 @@ while ans**3 < x:
 
 if ans**3 != x: print "not perfect cube"
 else: print('Cube root of {} is {}'.format(x, ans))
-
