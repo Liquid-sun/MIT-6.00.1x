@@ -172,8 +172,20 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    import collections
+    cu = collections.Counter(word)
 
+    # check if all letters from word are in hand
+    ch_check = all([i in hand.keys() for i in word]) 
+
+    # check rest conditions that if true should return false
+    if word == "" or word not in wordList or ch_check is False:
+        return False
+
+    # check if number of letters in word is min equal available
+    # letters in the hand
+    letter_check = all([cu[k] <= hand[k] for k,v in cu.items() if k in hand.keys()])
+    return letter_check
 
 #
 # Problem #4: Playing a hand
