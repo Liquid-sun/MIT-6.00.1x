@@ -151,8 +151,11 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    # TO DO ... <-- Remove this comment when you code this function
-
+    import copy
+    d = copy.deepcopy(hand)
+    for l in word:
+        d[l] = d[l] - 1
+    return d
 
 
 #
