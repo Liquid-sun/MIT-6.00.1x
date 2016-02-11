@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # 6.00x Problem Set 4A Template
 #
 # The 6.00 Word Game
@@ -53,7 +55,7 @@ def getFrequencyDict(sequence):
     for x in sequence:
         freq[x] = freq.get(x,0) + 1
     return freq
-	
+    
 
 # (end of helper code)
 # -----------------------------------
@@ -80,9 +82,6 @@ def getWordScore(word, n):
     bonus = score * len(word)
     extra_bonus = 50 if len(word) == n else 0
     return bonus + extra_bonus
-    
-    
-
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -101,8 +100,8 @@ def displayHand(hand):
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
-             print letter,              # print all on the same line
-    print                               # print an empty line
+             print letter,               # print all on the same line
+    print                                # print an empty line
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -225,31 +224,41 @@ def playHand(hand, wordList, n):
     """
     # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
-    
+    total_score = 0
+
+    hand_len = calculateHandlen(hand)
+
     # As long as there are still letters left in the hand:
-    
+
+    while(hand_len > 0):
         # Display the hand
+        print "Current Hand: ", displayHand(hand)
         
         # Ask user for input
-        
+        user_input = raw_input('Enter word, or a "." to indicate that you are finished: ')
         # If the input is a single period:
-        
+        if user_input == ".":
+            print("Goodbye! Total score: {} points.".format(total_score))
             # End the game (break out of the loop)
-
+            break
             
         # Otherwise (the input is not a single period):
-        
-            # If the word is not valid:
-            
-                # Reject invalid word (print a message followed by a blank line)
-
+        # If the word is not valid:
+        # Reject invalid word (print a message followed by a blank line)
+        elif not isValidWord(user_input, hand, wordList):
+            print("Invalid word, please try again.")
+            print
+        else:
             # Otherwise (the word is valid):
-
-                # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
-                
-                # Update the hand 
-                
-
+            # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
+            score = getWordScore(user_input, n)
+            total_score += score
+            print("{} earned {} points. Total: {} points".format(user_input, score, total_score))
+            # Update the hand 
+            hand = updateHand(hand, user_input)
+            if calculateHandlen(hand) == 0:
+                print("Run out of letters. Total score: {} points.".format(total_score))
+                break
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
 
 
@@ -280,4 +289,6 @@ def playGame(wordList):
 #
 if __name__ == '__main__':
     wordList = loadWords()
-    playGame(wordList)
+    #playGame(wordList)
+    #playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7)
+    playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
