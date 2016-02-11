@@ -1,5 +1,31 @@
+#!/usr/bin/env python
+
+
 from ps4a import *
 import time
+
+
+def isWordOK(word, hand, wordList):
+    """
+    Returns True if word is in the wordList and is entirely
+    composed of letters in the hand. Otherwise, returns False.
+
+    Does not mutate hand or wordList.
+   
+    word: string
+    hand: dictionary (string -> int)
+    wordList: list of lowercase strings
+    """
+    import collections
+    cu = collections.Counter(word)
+
+    # check if all letters from word are in hand
+    ch_check = all([i in hand.keys() for i in word]) 
+
+    # check if number of letters in word is min or equal available letters in the hand
+    letter_check = all([cu[k] <= hand[k] for k,v in cu.items() if k in hand.keys()])
+
+    return all([ch_check, letter_check]) 
 
 
 #
@@ -25,23 +51,25 @@ def compChooseWord(hand, wordList, n):
     """
     # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Create a new variable to store the maximum score seen so far (initially 0)
-
+    max_score = 0
     # Create a new variable to store the best word seen so far (initially None)  
+    best_word = None
 
     # For each word in the wordList
-
+    for word in wordList:
         # If you can construct the word from your hand
         # (hint: you can use isValidWord, or - since you don't really need to test if the word is in the wordList - you can make a similar function that omits that test)
-
+        if isWordOK(word, hand, wordList):
             # Find out how much making that word is worth
-
+            word_score = getWordScore(w, n)
             # If the score for that word is higher than your best score
-
-                # Update your best score, and best word accordingly
-
-
+            if word_score > max_score:
+            # Update your best score, and best word accordingly
+                max_score = word_score
+                best_word = w
     # return the best word you found.
-
+    return best_word
+    
 
 #
 # Problem #7: Computer plays a hand
