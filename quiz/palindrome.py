@@ -1,4 +1,14 @@
+#!/usr/bin/env python
 
+"""
+Problem 4
+
+Write a Python function that returns True if aString is a palindrome
+(reads the same forwards or reversed) and False otherwise. 
+Do not use Python's built-in reverse function or aString[::-1] 
+to reverse strings.
+
+"""
 
 
 def isPalindrome(s):
@@ -10,10 +20,7 @@ def isPalindrome(s):
     
     def to_chars(s):
         s = s.lower()
-        ans = ""
-        for ch in s:
-	    if ch in string.ascii_lowercase:
-                ans += ch
+        ans = ''.join([ch for ch in s if ch in string.ascii_lowercase])
 	return ans
 
     def is_pal(s):
