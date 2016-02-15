@@ -26,11 +26,40 @@ only in d1 and not in d2 or (b) every key-value pair in d2 whose key appears onl
 
 """
 
+import itertools
+
+
+def f(x, y):
+    return x > y
 
 
 def dict_interdiff(d1, d2):
     """
     d1, d2: dicts whose keys and values are integers
     Returns a tuple of dictionaries according to the instructions above,
+    
     """
     
+    s1 = set(d1.keys())
+    s2 = set(d2.keys())
+    s1_out = s1.intersection(s2)
+    
+    d_out_1 = {k:f(d1[k], d2[k]) for k,v in d1.items() if k in s1_out}
+
+    da = {k:v for k,v in d1.items() if k not in d2.keys()}
+    db = {k:v for k,v in d2.items() if k not in d1.keys()}
+
+    d_out_2 = dict(itertools.chain(da.items(), db.items()))
+
+    return (d_out_1, d_out_2)
+
+
+
+if __name__=="__main__":
+   #d1 = {1:30, 2:20, 3:30, 5:80}
+   #d2 = {1:40, 2:50, 3:60, 4:70, 6:90}
+   d1 = {1:30, 2:20, 3:30}
+   d2 = {1:40, 2:50, 3:60}
+   
+   print dict_interdiff(d1, d2)    
+
