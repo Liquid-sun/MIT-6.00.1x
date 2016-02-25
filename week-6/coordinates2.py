@@ -34,8 +34,11 @@ class Coordinate(object):
     def __str__(self):
         return '<' + str(self.getX()) + ',' + str(self.getY()) + '>'
 
-
-
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+        
+    def __repr__(self):
+        return "Coordinate({}, {})".format(self.x, self.y)
 
 
 
@@ -44,4 +47,9 @@ def main():
 
 
 if __name__=="__main__":
-    main()
+   c1 = Coordinate(3,4)
+   c2 = Coordinate(6,4)
+   print("c1 == c2 ? {}".format(c1 == c2))
+   print repr(c2)
+
+
