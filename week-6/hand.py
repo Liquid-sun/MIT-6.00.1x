@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import random 
 
 class Hand(object):
@@ -86,14 +88,17 @@ class Hand(object):
         # Your code here
         raise NotImplementedError()
 
-    
-myHand = Hand(7)
-print myHand
-print myHand.calculateLen()
 
-myHand.setDummyHand('aazzmsp')
-print myHand
-print myHand.calculateLen()
 
-myHand.update('za')
-print myHand
+if __name__=="__main__":    
+    myHand = Hand(7)
+    print myHand
+    print myHand.calculateLen()
+
+    myHand.setDummyHand('aazzmsp')
+    print myHand
+    print myHand.calculateLen()
+
+    myHand.update('za')
+    print myHand
+
