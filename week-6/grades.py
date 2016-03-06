@@ -33,4 +33,5 @@ class Grades(object):
         if not self.isSorted:
             self.students.sort()
             self.isSorted = True
-        return self.students[:]    
+        for s in self.students:
+            yield s   
