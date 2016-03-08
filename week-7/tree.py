@@ -20,6 +20,20 @@ class binaryTree(object):
         self.parent = parent
 
 
+def DFSBinary(root, fcn):
+    '''Depth first search binary tree.'''
+    stack = [root]
+    while len(stack) > 0:
+        if fcn(stack[0]):
+            return True
+        else:
+            temp = stack.pop(0)
+            if temp.getRightBranch():
+                stack.insert(0, temp.getRightBranch())
+            if temp.getLeftBranch():
+                stack.insert(0, temp.getLeftBranch())
+    return False
+
 
 if __name__=="__main__":
     # set nodes
@@ -44,4 +58,3 @@ if __name__=="__main__":
     n6.setParent(n8)
     n6.setRightBranch(n7)
     n7.setParent(n6)
-    
