@@ -35,6 +35,42 @@ def DFSBinary(root, fcn):
     return False
 
 
+def BFSBinary(root, fcn):
+    queue = [root]
+    while len(queue) > 0:
+        if fcn(queue[0]):
+            return True
+        else:
+            temp = queue.pop(0)
+            if temp.getLeftBranch():
+                queue.append(temp.getLeftBranch())
+            if temp.getRightBranch():
+                queue.append(tem.getRightBranch())
+    return False
+
+
+def TracePath(node):
+    if not node.getParent():
+        return [node]
+    else:
+        return [node] + TracePath(node.getParent())
+
+
+def DFSBinaryOrdered(root, fcn, ItFcn):
+    stack = [root]
+    while len(stack) > 0:
+        if fcn(stack[0]):
+            return True
+        elif ItFcn(stack[0]):
+            temp = stack.pop(0)
+            if temp.getLeftBranch():
+                stack.insert(0, temp.getLeftBranch())
+        else:
+            if temp.getRightBranch():
+                stack.insert(0, temp.getRightBranch())
+    return False
+
+
 if __name__=="__main__":
     # set nodes
     n5 = binaryTree(5)
