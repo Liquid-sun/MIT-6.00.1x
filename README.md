@@ -1,4 +1,4 @@
-# Intro to Computer Science and Programming Using Python (MIT-6.00.1x)
+# MIT-6.00.1x
 
 ![](https://raw.githubusercontent.com/qba73/MIT-6.00.1x/master/art/mit601.png)
 
